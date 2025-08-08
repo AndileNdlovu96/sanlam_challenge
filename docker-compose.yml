@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  streamlit:
+    build: .
+    container_name: streamlit_app
+    command: streamlit run streamlit_app.py --server.port=8501 --server.enableCORS=false
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./output:/app/output
+      - ./data:/app/data
+    environment:
+      - PYTHONUNBUFFERED=1
+
+  batch_pipeline:
+    build: .
+    container_name: batch_pipeline
+    command: >
+      sh -c "python scripts/ingest.py && python scripts/process.py"
+    volumes:
+      - ./output:/app/output
+      - ./data:/app/data

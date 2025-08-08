@@ -106,6 +106,6 @@ docker-compose up --build
 
 Then open your browser at:
 
-[text](http://localhost:8501)
+[http://localhost:8501](http://localhost:8501)
 
 
